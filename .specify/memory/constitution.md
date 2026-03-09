@@ -1,50 +1,79 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!--
+Sync Impact Report
+==================
+Version change: (none) → 1.0.0
+Modified principles: N/A (initial ratification)
+Added sections: All filled from template
+Removed sections: None
+Templates requiring updates:
+  - .specify/templates/plan-template.md ✅ (Constitution Check remains generic; gates derived from constitution)
+  - .specify/templates/spec-template.md ✅ (no constitution-specific sections; scope/requirements aligned)
+  - .specify/templates/tasks-template.md ✅ (task categorization aligns with principles)
+  - .specify/templates/commands/*.md ⚠ N/A (no commands directory found)
+Follow-up TODOs: None
+-->
+
+# owllog-pm Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. Livewire-First UI
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+Reactive UIs MUST be built with Livewire components. Components MUST be self-contained
+and independently testable. Use `wire:model`, `wire:click`, and related directives for
+reactivity. Rationale: Livewire 4 is the primary UI framework; consistency and testability
+depend on component boundaries.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### II. Test-First (NON-NEGOTIABLE)
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+TDD is mandatory: tests written → user approved → tests fail → then implement.
+Red-Green-Refactor cycle strictly enforced. Use Pest 4 for PHP tests. Rationale:
+prevents regression and ensures specifications drive implementation.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### III. Specification-Driven
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+Features MUST be driven by specs, plans, and tasks from the speckit workflow. User
+stories MUST have acceptance scenarios and priorities (P1, P2, P3). Each story MUST
+be independently testable and deliverable as an MVP slice. Rationale: traceability
+and incremental delivery.
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+### IV. Flux UI Consistency
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+Use Flux components for forms, modals, inputs, buttons, and related UI elements.
+Avoid raw HTML form elements where Flux equivalents exist. Rationale: consistent
+look, accessibility, and reduced custom CSS.
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+### V. Simplicity & Observability
+
+YAGNI principles apply. Complexity MUST be justified. Structured logging required;
+Laravel Pail for local debugging. Rationale: maintainability and debuggability.
+
+## Technology Stack
+
+**Runtime**: PHP 8.2+, Laravel 12, Livewire 4, Livewire Flux 2.x, Laravel Fortify.
+
+**Testing**: Pest 4, Pest Laravel plugin.
+
+**Frontend**: Tailwind CSS v4, Vite.
+
+**Storage**: SQLite (default), migrations required for schema changes.
+
+**Commands**: `composer setup`, `composer dev`, `composer test`, `composer lint`.
+
+## Development Workflow
+
+1. **Spec** → **Plan** → **Tasks** (speckit flow)
+2. Constitution Check MUST pass before Phase 0 research and after Phase 1 design
+3. PRs MUST verify compliance with principles
+4. Tests MUST fail before implementation (TDD gate)
+5. Use `AGENTS.md` (and `.cursor/rules` when present) for runtime development guidance
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+- This constitution supersedes ad-hoc practices
+- Amendments require documentation, approval, and migration plan if behavior changes
+- Version bump rules: MAJOR = backward-incompatible principle changes; MINOR = new
+  principle or material expansion; PATCH = clarifications, typos, non-semantic fixes
+- All PRs/reviews MUST verify compliance with Core Principles
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+**Version**: 1.0.0 | **Ratified**: 2025-03-09 | **Last Amended**: 2025-03-09
